@@ -113,7 +113,7 @@ th {
     <li>Outside center:
       <ul>
        <li>Pitch stick controls altitude.</li>
-       <li>Throttle stick controls the airspeed of the aircraft (as for centred RPY sticks).</li>
+       <li>Throttle stick controls the airspeed of the aircraft (as for centered RPY sticks).</li>
        <li>Yaw stick actuates the rudder (signal will be added to the one calculated by the autopilot to maintain <a href="https://en.wikipedia.org/wiki/Coordinated_flight">coordinated flight</a>). This is the same as <a href="#stabilized_fw">Stabilized</a>.</li>
     </ul>
   </li>
@@ -196,7 +196,7 @@ th {
  <td><a href="../flight_modes/return.md">Return</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
- <td>Vehicle ascends to a safe height and then returns to its home position and circles. </td>
+ <td>Vehicle flies a clear path to a safe location. The return behaviour depends on parameter settings, and may follow a mission path and/or mission landing pattern (if defined).</td>
 </tr>
 
 
@@ -205,6 +205,13 @@ th {
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
  <td>Vehicle executes a <a href="../flying/missions.md">predefined mission/flight plan</a> that has been uploaded to the flight controller. </td>
+</tr>
+
+<tr id="offboard_fw">
+ <td><a href="../flight_modes/offboard.md">Offboard</a></td>
+ <td colspan="3">Auto</td>
+ <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
+ <td>Vehicle obeys attitude setpoints provided over MAVLink (often from a companion computer connected via serial cable or wifi).</td>
 </tr>
  
 </tbody></table>
@@ -356,6 +363,19 @@ th {
 </tr>
 
 
+<tr id="orbit_mc">
+ <td><a href="../flight_modes/orbit.md">Orbit</a>
+ <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="Easy to fly" width="20px" /></a></p>
+ </td>
+ <td>-</td>
+ <td>-</td>
+ <td>-</td>
+ <td></td>
+ <td><p>GCS-initiated guided mode for flying a circle, always facing the center.</p> 
+  <p>Mode must be started from GCS, specifying center point and initial radius and altitude. RC control is optional, and can be used to set the orbit altitude, radius, speed, and direction. Altitude control is the same as for <a href="#position_mc">Position Mode</a>.</p>
+ </td>
+</tr>
+
 <tr id="takeoff_mc">
  <td><a href="../flight_modes/takeoff.md">Takeoff</a></td>
  <td colspan="3">Auto</td>
@@ -381,8 +401,7 @@ th {
  <td><a href="../flight_modes/return.md">Return</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
- <td>Vehicle ascends to a safe height and then returns to its home position and lands. 
-</td>
+ <td>Vehicle flies a clear path to a safe location. The return behaviour depends on parameter settings, and may follow a mission path and/or mission landing pattern (if defined).</td>
 </tr>
 
 
@@ -390,7 +409,7 @@ th {
  <td><a href="../flight_modes/mission.md">Mission</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
- <td>Vehicle executes a <a href="../flying/missions.md">predefined mission/flight plan</a> that has been uploaded to the flight controller. </td>
+ <td>Vehicle executes a <a href="../flying/missions.md">predefined mission/flight plan</a> that has been uploaded to the flight controller.</td>
 </tr>
 
 <tr id="followme_mc">
@@ -404,7 +423,7 @@ th {
  <td><a href="../flight_modes/offboard.md">Offboard</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
- <td>Vehicle obeys a position, velocity or attitude setpoint provided over MAVLink (often from a companion computer connected via serial cable or wifi).</td>
+ <td>Vehicle obeys a position, velocity or attitude setpoints provided over MAVLink (often from a companion computer connected via serial cable or wifi).</td>
 </tr>
  
 </tbody></table>
@@ -436,6 +455,4 @@ Auto | This mode is automatic (RC control is disabled by default except to chang
 Abbreviations:
   * RPY: Roll, Pitch, Yaw
   * RPT: Roll, Pitch Throttle
-
-
 

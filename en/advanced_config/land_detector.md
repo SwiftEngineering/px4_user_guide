@@ -5,9 +5,9 @@ This topic explains the main parameters you may wish to tune in order to improve
 
 ## Auto-Disarming
 
-The land-detector does not auto-disarm the system on landing.
+The land-detector automatically disarms the vehicle on landing.
 
-You can set [COM_DISARM_LAND](../advanced_config/parameter_reference.md#COM_DISARM_LAND) to specify the number of seconds after landing that the system should disarm (auto-disarming is disabled if this is zero).
+You can set [COM_DISARM_LAND](../advanced_config/parameter_reference.md#COM_DISARM_LAND) to specify the number of seconds after landing that the system should disarm (or turn off auto-disarming by setting the parameter to -1).
 
 ## Multicopter Configuration
 
@@ -34,15 +34,16 @@ These two parameters are sometimes worth tuning:
 * [LNDFW_AIRSPD_MAX](../advanced_config/parameter_reference.md#LNDFW_AIRSPD_MAX) - the maximum airspeed allowed for the system still to be considered landed. 
   The default of 8 m/s is a reliable tradeoff between airspeed sensing accuracy and triggering fast enough. 
   Better airspeed sensors should allow lower values of this parameter.
-* [LNDFW_VELI_MAX](../advanced_config/parameter_reference.md#LNDFW_VELI_MAX) - the maximum velocity for the system to be still considered landed. 
-  This parameter can be adjusted to ensure a sooner or later land detection on throwing the airframe for hand-launches.
+* [LNDFW_VEL_XY_MAX ](../advanced_config/parameter_reference.md#LNDFW_VEL_XY_MAX) - the maximum horizontal velocity for the system to be still be considered landed. 
+* [LNDFW_VEL_Z_MAX](../advanced_config/parameter_reference.md#LNDFW_VEL_XY_MAX) - the maximum vertical velocity for the system to be still be considered landed.
+  This parameter can be adjusted to ensure land detection triggers earlier or later on throwing the airframe for hand-launches.
 
 
 ## Land Detector States {#states}
 
 ### Multicopter Land Detection
 
-In order to detect landing, the multicopter first has to go through three different states, where each state contains the conditions from the previous states plus tighter constraints. 
+In order to detect landing, the multicopter first has to go through three different states, where each state contains the conditions from the previous states plus tighter constraints.
 If a condition cannot be reached because of missing sensors, then the condition is true by default. 
 For instance, in [Acro mode](../flight_modes/acro_mc.md) and no sensor is active except for the gyro sensor, then the detection solely relies on thrust output and time. 
  
@@ -55,7 +56,7 @@ This state is reached if following conditions are true for 0.35 seconds:
 
 - no vertical movement ([LNDMC_Z_VEL_MAX](../advanced_config/parameter_reference.md#LNDMC_Z_VEL_MAX))
 - no horizontal movement ([LNDMC_XY_VEL_MAX](../advanced_config/parameter_reference.md#LNDMC_XY_VEL_MAX))
-- low thrust `MPC_THR_MIN + (MPC_THR_HOVER - MPC_THR_MIN) * 0.3` or velocity setpoint is 0.9 of land speed but vehicle has no vertical movement.
+- lower thrust than [MPC_THR_MIN](../advanced_config/parameter_reference.md#MPC_THR_MIN) + ([MPC_THR_HOVER](../advanced_config/parameter_reference.md#MPC_THR_HOVER) - [MPC_THR_MIN](../advanced_config/parameter_reference.md#MPC_THR_MIN)) * [LNDMC_LOW_T_THR](../advanced_config/parameter_reference.md#LNDMC_LOW_T_THR), or velocity setpoint is 0.9 of land speed but vehicle has no vertical movement.
 
 If the vehicle is in position- or velocity-control and ground contact was detected, 
 the position controller will set the thrust vector along the body x-y-axis to zero.

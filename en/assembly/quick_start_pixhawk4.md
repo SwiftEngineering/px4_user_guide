@@ -44,7 +44,7 @@ Connect the output of the *Power Management Board* (PM board) that comes with th
 
 The image below shows the power management board provided with *Pixhawk 4*.
 
-![Pixhawk 4 - Power Management Board](../../assets/flight_controller/pixhawk4/pixhawk4_power_management_board.png)
+![Pixhawk 4 - Power Management Board](../../assets/hardware/power_module/holybro_pm07/pixhawk4_power_management_board.png)
 
 > **Note** If using a plane or rover, the 8 pin power (+) rail of **FMU PWM-OUT** will need to be separately powered in order to drive servos for rudders, elevons etc. To do this, the power rail needs to be connected to a BEC equipped ESC or a standalone 5V BEC or a 2S LiPo battery. Be careful with the voltage of servo you are going to use here.
 
@@ -134,14 +134,15 @@ The vehicle-based radio should be connected to the **TELEM1** port as shown belo
 ![Pixhawk 4/Telemetry Radio](../../assets/flight_controller/pixhawk4/pixhawk4_telemetry_radio.jpg)
 
 
+## SD Card (Optional) {#sd_card}
 
-## SD Card (Optional)
-
-SD cards are most commonly used to [log and analyse flight details](../getting_started/flight_reporting.md). Insert the card (included in Pixhawk 4 kit) into *Pixhawk 4* as shown below.
+SD cards are highly recommended as they are needed to [log and analyse flight details](../getting_started/flight_reporting.md), to run missions, and to use UAVCAN-bus hardware.
+Insert the card (included in Pixhawk 4 kit) into *Pixhawk 4* as shown below.
 
 ![Pixhawk 4/SD Card](../../assets/flight_controller/pixhawk4/pixhawk4_sd_card.png)
 
-> **Tip** The SanDisk Extreme U3 32GB is [highly recommended](https://dev.px4.io/en/log/logging.html#sd-cards) (Developer Guide).
+> **Tip** For more information see [Basic Concepts > SD Cards (Removable Memory)](../getting_started/px4_basic_concepts.md#sd_cards).
+
 
 ## Motors
 
@@ -157,6 +158,9 @@ Motors/servos are connected to the **I/O PWM OUT** (**MAIN**) and **FMU PWM OUT*
 
 The wiring and configuration of optional/less common components is covered within the topics for individual [peripherals](../peripherals/README.md).
 
+## Pinouts
+
+[Pixhawk 4 Pinouts](http://www.holybro.com/manual/Pixhawk4-Pinouts.pdf) (Holybro)
 
 ## Configuration
 
@@ -171,5 +175,8 @@ QuadPlane specific configuration is covered here: [QuadPlane VTOL Configuration]
 ![QuadCopter Pixhawk Wiring Infographic](../../images/pixhawk_infographic2.jpg) --> 
 
 ## Further information
-<!-- - [Pixhawk 4 Quick Start Guide (Holybro)]() Add link--> 
-- [Pixhawk 4](../flight_controller/pixhawk4.md)
+
+- [Pixhawk 4](../flight_controller/pixhawk4.md) (Overview page)
+- [Pixhawk 4 Technical Data Sheet](https://github.com/PX4/px4_user_guide/raw/master/assets/flight_controller/pixhawk4/pixhawk4_technical_data_sheet.pdf)
+- [Pixhawk 4 Pinouts](http://www.holybro.com/manual/Pixhawk4-Pinouts.pdf) (Holybro)
+- [Pixhawk 4 Quick Start Guide (Holybro)](http://www.holybro.com/manual/Pixhawk4-quickstartguide.pdf)

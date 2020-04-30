@@ -1,6 +1,8 @@
 # Crazyflie 2.0
 
-The Crazyflie line of micro quads was created by Bitcraze AB. An overview of the Crazyflie 2.0 can be [found here](https://www.bitcraze.io/crazyflie-2/).
+> **Warning** PX4 support for this flight controller is [experimental](../flight_controller/autopilot_experimental.md).
+
+The Crazyflie line of micro quads was created by Bitcraze AB.An overview of the Crazyflie 2.0 can be [found here](https://www.bitcraze.io/crazyflie-2/).
 
 ![Crazyflie2 Image](../../assets/flight_controller/crazyflie/crazyflie2_hero.png)
 
@@ -20,9 +22,11 @@ The Crazyflie line of micro quads was created by Bitcraze AB. An overview of the
 
 * [Crazyflie 2.0](https://store.bitcraze.io/collections/kits/products/crazyflie-2-0).
 * [Crazyradio PA 2.4 GHz USB dongle](https://store.bitcraze.io/collections/kits/products/crazyradio-pa): used for wireless communication between *QGroundControl* and Crazyflie 2.0.
-* [Breakout deck](https://store.bitcraze.io/collections/decks/products/breakout-deck): breakout expansion board for connecting new peripherals. 
-* [Flow deck](https://store.bitcraze.io/collections/decks/products/flow-deck): contains an optical flow sensor to measure movements of the ground and a distance sensor to measure the distance to the ground. This will be useful for precise altitude and position control.
-* [Z-ranger deck](https://store.bitcraze.io/collections/decks/products/z-ranger-deck) has the same distance sensor as the Flow deck to measure the distance to the ground. This will be useful for precise altitude control.
+* [Breakout deck](https://store.bitcraze.io/collections/decks/products/breakout-deck): breakout expansion board for connecting new peripherals.
+* [Flow deck](https://store.bitcraze.io/collections/decks/products/flow-deck): contains an optical flow sensor to measure movements of the ground and a distance sensor to measure the distance to the ground.
+  This will be useful for precise altitude and position control.
+* [Z-ranger deck](https://store.bitcraze.io/collections/decks/products/z-ranger-deck) has the same distance sensor as the Flow deck to measure the distance to the ground.
+  This will be useful for precise altitude control.
 * [SD-card deck](https://store.bitcraze.io/collections/decks/products/sd-card-deck): used for high speed onboard logging to a micro SD card.
 * [Logitech Joystick](https://www.logitechg.com/en-ch/product/f310-gamepad).
 
@@ -72,7 +76,15 @@ After setting up the PX4 development environment, follow these steps to install 
 1. Wait for completion.
 1. Done! Calibrate the sensors using [QGroundControl](https://docs.qgroundcontrol.com/en/SetupView/Sensors.html).
 
-> **Note** If QGroundControl does not connect with the vehicle, ensure that in [nuttx-config](https://github.com/PX4/Firmware/blob/master/platforms/nuttx/nuttx-configs/crazyflie/nsh/defconfig#L934) for crazyflie `# CONFIG_DEV_LOWCONSOLE is not set` is replaced by `CONFIG_DEV_LOWCONSOLE=y`
+> **Note** If QGroundControl does not connect with the vehicle, ensure that in [nuttx-config](https://github.com/PX4/Firmware/blob/master/boards/bitcraze/crazyflie/nuttx-config/nsh/defconfig) for crazyflie `# CONFIG_DEV_LOWCONSOLE is not set` is replaced by `CONFIG_DEV_LOWCONSOLE=y`.
+  This should be done using *menuconfig*:
+  ```
+  make bitcraze_crazyflie_default menuconfig
+  ```
+  or *qconfig* (Check *Low-level console support* under *Serial Driver Support* in GUI):
+  ```
+  make bitcraze_crazyflie_default qconfig
+  ```
 
 ## Wireless Setup Instructions
 
@@ -138,11 +150,11 @@ To connect Crazyflie 2.0 with crazyradio, **launch cfbridge** by following these
     python cfbridge.py
     ```
   > **Note** *Cfbridge* by default tries to initiate the radio link communication on channel 80 and with crazyflie address 0xE7E7E7E7E7. 
-  If you are using [multiple crazyflies and/or crazyradios](https://github.com/dennisss/cfbridge/blob/master/README.md#advanced- 
-  swarming) in the same room and want to use a different channel and/or address for each, first connect the crazyflie with QGroundControl via a USB
-  cable and change the syslink parameters (channel, address) in QGroundControl. Next, launch the cfbridge by giving the same channel and address as   the first and second arguments respectively, e.g: `python cfbridge.py 90 0x0202020202`
+    If you are using [multiple crazyflies and/or crazyradios](https://github.com/dennisss/cfbridge/blob/master/README.md#advanced-swarming) in the same room and want to use a different channel and/or address for each, first connect the crazyflie with QGroundControl via a USB cable and change the syslink parameters (channel, address) in QGroundControl.
+    Next, launch the cfbridge by giving the same channel and address as   the first and second arguments respectively, e.g: `python cfbridge.py 90 0x0202020202`
 - Open QGroundControl.
-- After using *cfbridge*, you can deactivate the virtualenv if you activated it by pressing `CTRL+z`. Most of the time, launching *cfbridge* again from the same terminal doesn't connect to crazyflie, this can be solved by closing the terminal and relaunching *cfbridge* in a new terminal. 
+- After using *cfbridge*, you can deactivate the virtualenv if you activated it by pressing `CTRL+z`.
+  Most of the time, launching *cfbridge* again from the same terminal doesn't connect to crazyflie, this can be solved by closing the terminal and relaunching *cfbridge* in a new terminal. 
 
 > **Tip** If you change any driver in [crazyflie-lib-python](https://github.com/bitcraze/crazyflie-lib-python) 
 or if launching *cfbridge* in a new terminal does not find crazyflie, you can try navigating to the crazyflie-lib-python folder and 

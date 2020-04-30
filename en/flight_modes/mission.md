@@ -7,9 +7,11 @@ The mission is typically created and uploaded with a Ground Control Station (GCS
 
 <span></span>
 > **Note** 
->  * This mode requires 3d position information (e.g. GPS).
->  * This mode is automatic (RC control is disabled [by default](../advanced_config/parameter_reference.md#COM_RC_OVERRIDE) except to change modes).
->  * The vehicle must be armed before this mode can be engaged.
+> * This mode requires 3d position information (e.g. GPS).
+> * The vehicle must be armed before this mode can be engaged.
+> * This mode is automatic - no user intervention is *required* to control the vehicle.
+> * RC control switches can be used to change flight modes on any vehicle.
+    RC stick movement will [by default](../advanced_config/parameter_reference.md#COM_RC_OVERRIDE) change the vehicle to [Position mode](../flight_modes/position_mc.md) when flying as a multicopter unless handling a critical battery failsafe (stick movement is ignored for fixed-wing flight).
 
 
 ## Description
@@ -54,18 +56,20 @@ For more information about mission planning, see:
 
 ## Mission Parameters
 
-Mission behaviour is affected by a number of parameters. 
-These cover, for example, how the vehicle will behave if it looses connection to its remote control during a mission ([NAV_RCL_ACT](../advanced_config/parameter_reference.md#NAV_RCL_ACT)), 
-the fixed-wing loiter radius ([NAV_LOITER_RAD](../advanced_config/parameter_reference.md#NAV_LOITER_RAD)), 
-acceptance radius for reaching a waypoint etc.
+Mission behaviour is affected by a number of parameters, most of which are documented in [Parameter Reference > Mission](../advanced_config/parameter_reference.md#mission).
+A very small subset are listed below.
 
-These are documented here: [Parameter Reference > Mission](../advanced_config/parameter_reference.md#mission)
+Parameter | Description
+--- | ---
+<span id="NAV_RCL_ACT"></span>[NAV_RCL_ACT](../advanced_config/parameter_reference.md#NAV_RCL_ACT) | RC loss failsafe mode (what the vehicle will do if it looses RC connection) - e.g. enter hold mode, return mode, terminate etc.
+<span id="NAV_LOITER_RAD"></span>[NAV_LOITER_RAD](../advanced_config/parameter_reference.md#NAV_RCL_ACT) | Fixed-wing loiter radius.
+<span id="COM_RC_OVERRIDE"></span>[COM_RC_OVERRIDE](../advanced_config/parameter_reference.md#COM_RC_OVERRIDE) | If enabled for auto modes, stick movement gives control back to the pilot (switches to [Position mode](../flight_modes/position_mc.md) - except when vehicle is handling a critical battery failsafe). Enabled by default.
 
 
 ## Supported Mission Commands {#mission_commands}
 
 PX4 "accepts" the following MAVLink mission commands in Mission mode (note: caveats below list).
-Unless otherwise noted, the implementation is as defined in the MAVLink speification.
+Unless otherwise noted, the implementation is as defined in the MAVLink specification.
 
 * [MAV_CMD_NAV_WAYPOINT](https://mavlink.io/en/messages/common.html#MAV_CMD_NAV_WAYPOINT)
   *  *Param3* (flythrough) is ignored. Flythrough is always enabled if *param 1* (time_inside) > 0.
@@ -114,9 +118,24 @@ Note:
 - PX4 parses the above messages, but they are not necessary *acted* on. For example, some messages are vehicle-type specific.
 - PX4 generally does not support local frames for mission commands (e.g. [MAV_FRAME_LOCAL_NED](https://mavlink.io/en/messages/common.html#MAV_FRAME_LOCAL_NED)).
 - Not all messages/commands are exposed via *QGroundControl*.
-- The list may be [out of date](#out_of_date) as messages are added. You can check the current set by inspecting the code.
+- The list may become out of date as messages are added. 
+  You can check the current set by inspecting the code.
   Support is `MavlinkMissionManager::parse_mavlink_mission_item` in [/src/modules/mavlink/mavlink_mission.cpp](https://github.com/PX4/Firmware/blob/master/src/modules/mavlink/mavlink_mission.cpp) 
   (list generated in [this git changelist](https://github.com/PX4/Firmware/commit/ca1f7a4a194c23303c23ca79b5905ff8bfb94c22)).
   
   > **Note** Please add an bug fix or PR if you find a missing/incorrect message.
+  
+## Inter-Waypoint Trajectory
 
+PX4 expects to follow a straight line from the previous waypoint to the current target (it does not plan any other kind of path between waypoints - if you need one you can simulate this by adding additional waypoints).
+
+MC vehicles will change the *speed* when approaching or leaving a waypoint based on the [jerk-limited](../config_mc/mc_jerk_limited_type_trajectory.md#auto-mode) tuning.
+
+
+Vehicles switch to the next waypoint as soon as they enter the acceptance radius. 
+- For MC this radius is defined by [NAV_ACC_RAD](../advanced_config/parameter_reference.md#NAV_ACC_RAD)
+- For FW the radius is defined by the "L1 distance".
+  - The L1 distance is computed from two parameters: [FW_L1_DAMPING](../advanced_config/parameter_reference.md#FW_L1_DAMPING) and [FW_L1_PERIOD](../advanced_config/parameter_reference.md#FW_L1_PERIOD), and the current ground speed.
+  - By default, it's about 70 meters.
+  - The equation is:
+    $$L_{1_{distance}}=\frac{1}{\pi}L_{1_{damping}}L_{1_{period}}\left \| \vec{v}_{ {xy}_{ground} } \right \|$$

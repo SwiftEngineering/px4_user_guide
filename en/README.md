@@ -2,7 +2,7 @@
 
 # PX4 Autopilot User Guide ({{ book.px4_version }})
 
-[![Releases](https://img.shields.io/github/release/PX4/Firmware.svg)](https://github.com/PX4/Firmware/releases) [![Discuss](https://img.shields.io/badge/discuss-px4-ff69b4.svg)](http://discuss.px4.io/) [![Slack](https://px4-slack.herokuapp.com/badge.svg)](http://slack.px4.io) 
+[![Releases](https://img.shields.io/badge/release-{{ book.px4_version }}-blue.svg)](https://github.com/PX4/Firmware/releases) [![Discuss](https://img.shields.io/badge/discuss-px4-ff69b4.svg)](http://discuss.px4.io/) [![Slack](https://px4-slack.herokuapp.com/badge.svg)](http://slack.px4.io) 
 
 PX4 is the *Professional Autopilot*. 
 Developed by world-class developers from industry and academia, and supported by an active world wide community, it powers all kinds of vehicles from racing and cargo drones through to ground vehicles and submersibles.
@@ -77,16 +77,16 @@ Where possible provide [flight logs](getting_started/flight_reporting.md) and ot
 ## Contributing
 
 Information on how to contribute to code and documentation can be found in the Developer Guide:
-- [Code](https://dev.px4.io/en/contribute/)
-- [Documentation](https://dev.px4.io/en/contribute/docs.html)
-- [Translation](https://dev.px4.io/en/contribute/docs.html)
+- [Code](https://dev.px4.io/master/en/contribute/)
+- [Documentation](https://dev.px4.io/master/en/contribute/docs.html)
+- [Translation](https://dev.px4.io/master/en/contribute/docs.html)
 
 ## License
 
 PX4 code is free to use and modify under the terms of the permissive 
 [BSD 3-clause license](https://opensource.org/licenses/BSD-3-Clause). 
 This documentation is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). 
-For more information see: [PX4 Development Guide > Licences](https://dev.px4.io/en/contribute/licenses.html).
+For more information see: [PX4 Development Guide > Licences](https://dev.px4.io/master/en/contribute/licenses.html).
 
 
 ### Icons

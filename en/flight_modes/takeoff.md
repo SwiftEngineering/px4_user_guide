@@ -4,10 +4,13 @@
 
 The *Takeoff* flight mode causes the vehicle to take off to a specified height and wait for further input.
 
-> **Note** 
->  * This mode requires GPS.
->  * This mode is automatic (RC control is disabled [by default](../advanced_config/parameter_reference.md#COM_RC_OVERRIDE) except to change modes).
->  * The vehicle must be armed before this mode can be engaged.
+> **Note**
+> * This mode requires GPS.
+> * The vehicle must be armed before this mode can be engaged.
+> * This mode is automatic - no user intervention is *required* to control the vehicle.
+> * RC control switches can be used to change flight modes on any vehicle.
+>   The effect of RC stick movement depends on the vehicle type.
+> * The [Failure Detector](../config/safety.md#failure_detector) will automatically stop the engines if there is a problem on takeoff.
 
 The specific behaviour for each vehicle type is described below.
 
@@ -15,26 +18,35 @@ The specific behaviour for each vehicle type is described below.
 
 A multi rotor ascends to the altitude defined in `MIS_TAKEOFF_ALT` and holds position.
 
+RC stick movement will [by default](#COM_RC_OVERRIDE) change the vehicle to [Position mode](../flight_modes/position_mc.md) unless handling a critical battery failsafe.
+
 Takeoff is affected by the following parameters:
 
 Parameter | Description
 --- | ---
-[MIS_TAKEOFF_ALT](../advanced_config/parameter_reference.md#MIS_TAKEOFF_ALT) | Target altitude during takeoff (default: 2.5m)
-[MPC_TKO_SPEED](../advanced_config/parameter_reference.md#MPC_TKO_SPEED) | Speed of ascent (default: 1.5m/s)
+<span id="MIS_TAKEOFF_ALT"></span>[MIS_TAKEOFF_ALT](../advanced_config/parameter_reference.md#MIS_TAKEOFF_ALT) | Target altitude during takeoff (default: 2.5m)
+<span id="MPC_TKO_SPEED"></span>[MPC_TKO_SPEED](../advanced_config/parameter_reference.md#MPC_TKO_SPEED) | Speed of ascent (default: 1.5m/s)
+<span id="COM_RC_OVERRIDE"></span>[COM_RC_OVERRIDE](../advanced_config/parameter_reference.md#COM_RC_OVERRIDE) | If enabled stick movement gives control back to the pilot in [Position mode](../flight_modes/position_mc.md) (except when vehicle is handling a critical battery failsafe). Enabled by default.
 
 ## Fixed Wing (FW) {#fixed_wing}
 
-The aircraft takes off in the current direction using either *catapult/hand-launch mode* or *runway takeoff mode*. The mode defaults to catapult/hand launch, but can be set to runway takeoff using `RWTO_TKOFF`.
+The aircraft takes off in the current direction using either *catapult/hand-launch mode* or *runway takeoff mode*.
+The mode defaults to catapult/hand launch, but can be set to runway takeoff using [RWTO_TKOFF](#RWTO_TKOFF).
 
-In *catapult/hand launch mode* the vehicle will perform a full throttle climbout (ramp up to `RWTO_MAX_THR` in about 2 seconds). Once the altitude error < [FW_CLMBOUT_DIFF](#FW_CLMBOUT_DIFF), regular navigation will proceed. 
+In *catapult/hand launch mode* the vehicle will perform a full throttle climbout (ramp up to [RWTO_MAX_THR](#RWTO_MAX_THR) in about 2 seconds).
+Once the altitude error < [FW_CLMBOUT_DIFF](#FW_CLMBOUT_DIFF), regular navigation will proceed.
 
-> **Note** In addition to the behaviour discussed above there is also a launch detector that may block the launch sequence from starting until some condition is met. For catapult launch this is some acceleration threshold.
+> **Note** In addition to the behaviour discussed above there is also a launch detector that may block the launch sequence from starting until some condition is met.
+  For catapult launch this is some acceleration threshold.
 
 The *runway takeoff mode* has the following phases:
 
-1. **Throttle ramp**: Clamped to the runway (pitch fixed, no roll, and heading hold) until reach the minimum airspeed for takeoff ([FW_AIRSPD_MIN](#FW_AIRSPD_MIN) x [RWTO_AIRSPD_SCL](#RWTO_AIRSPD_SCL)) 
+1. **Throttle ramp**: Clamped to the runway (pitch fixed, no roll, and heading hold) until reach the minimum airspeed for takeoff ([FW_AIRSPD_MIN](#FW_AIRSPD_MIN) x [RWTO_AIRSPD_SCL](#RWTO_AIRSPD_SCL)).
 1. **Takeoff**: Increase pitch and continue until vehicle altitude > navigation altitude ([RWTO_NAV_ALT](#RWTO_NAV_ALT)).
-1. **Climbout**: Climb until altitude above ground level > [FW_CLMBOUT_DIFF](#FW_CLMBOUT_DIFF). In this phase roll and heading restrictions are removed.
+1. **Climbout**: Climb until altitude above ground level > [FW_CLMBOUT_DIFF](#FW_CLMBOUT_DIFF).
+   In this phase roll and heading restrictions are removed.
+
+RC stick movement is ignored.
 
 Takeoff is affected by the following parameters:
 
@@ -53,6 +65,6 @@ Parameter | Description
 
 ## VTOL
 
-A VTOL follows the TAKEOFF behavior and parameters of [Fixed Wing](#fixed-wing-fw) when in FW mode, and of [Multicopter](#multi-copter-mc) when in MC mode.
+A VTOL follows the TAKEOFF behavior and parameters of [Fixed Wing](#fixed_wing) when in FW mode, and of [Multicopter](#multi-copter-mc) when in MC mode.
 
 <!-- this maps to AUTO_TAKEOFF in dev -->

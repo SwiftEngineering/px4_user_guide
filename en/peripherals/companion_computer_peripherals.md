@@ -9,7 +9,7 @@ Typical companion computer work with Pixhawk requires a companion link to transm
 
 There are a few devices that allow this communication bridge such as FTDI USB breakouts and level shifters (see below).
 
-> **Note** PX4 configuration for communicating with a companion computer over MAVLink configuration is covered in [MAVLink \(OSD / Telemetry\)](../peripherals/mavlink_peripherals.md#TELEM2).
+> **Note** PX4 configuration for communicating with a companion computer over MAVLink configuration is covered in [MAVLink \(OSD / Telemetry\)](../peripherals/mavlink_peripherals.md#example).
   Relevant topics/sections in the developer guide include: [Companion Computer for Pixhawk Series](http://dev.px4.io/en/companion_computer/pixhawk_companion.html), [Robotics](http://dev.px4.io/en/robotics/) and [RTPS/ROS2 Interface: PX4-FastRTPS Bridge](http://dev.px4.io/en/middleware/micrortps.html).
 
 ### FTDI Devices
@@ -25,7 +25,6 @@ Device | 3.3v IO (Default) | Flow Control | Tx/Rx LEDs | JST-GH
 [PixDev FTDI JST-GH Breakout](https://pixdev.myshopify.com/products/ftdi-breakout-jst-gh) | Yes | Yes | Yes | Yes
 [mRo USB FTDI Serial to JST-GH (Basic)](https://store.mrobotics.io/USB-FTDI-Serial-to-JST-GH-p/mro-ftdi-jstgh01-mr.htm) | Capable | Capable | No | Yes
 [SparkFun FTDI Basic Breakout](https://www.sparkfun.com/products/9873) | Yes | No | Yes | No
-[Hyperion Adapter USB-FTDI](https://www.brack.ch/hyperion-adapter-usb-ftdi-510688) | Yes | No | Yes | No
 
 
 ### Logic Level Shifters
@@ -50,9 +49,8 @@ They are in no way guaranteed to be plug and play with your companion computer.
 #### Where To Buy
 * [Intel® RealSense™ Depth Camera D435](https://click.intel.com/intelr-realsensetm-depth-camera-d435.html)
 * [Intel® RealSense™ Depth Camera D415](https://click.intel.com/intelr-realsensetm-depth-camera-d415.html)
-* [DUO MLX ](https://duo3d.com/product/duo-minilx-lv1)
 * [Ironsides](https://www.perceptin.io/products)
-
+* [DUO MLX](https://duo3d.com/product/duo-minilx-lv1) <!-- note, timeout on link 18Nov2019 -->
 
 ## Data Telephony (LTE) {#data_telephony}
 

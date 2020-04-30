@@ -1,7 +1,9 @@
 # Intel Aero Ready to Fly Drone
 
-The [Intel Aero Ready to Fly Drone](https://software.intel.com/en-us/aero/drone-dev-kit)® is a UAV development platform. 
-Part of this is the [Intel Aero Compute Board](https://software.intel.com/en-us/aero/dev-kit), running Linux on a Quad-core CPU. 
+> **Warning** This flight controller has been [discontinued](../flight_controller/autopilot_experimental.md) and is no longer commercially available.
+
+The *Intel Aero Ready to Fly Drone*® is a UAV development platform.
+Part of this is the *Intel Aero Compute Board*, running Linux on a Quad-core CPU. 
 The other part is an STM32 microcontroller that is connected to it and that runs PX4 on NuttX. 
 These are integrated in the same package on the *Intel Aero Ready to Fly Drone*, 
 which also includes the vision accessory kit.
@@ -143,12 +145,14 @@ After setting up the PX4 development environment, follow these steps update the 
 ## Connecting QGroundControl via Network
 
 1. Make sure you are connected to the board with WiFi or USB Network
-1. ssh to the board and make sure MAVLink forwarding runs. By default it automatically starts when booting. It can be started manually with:
+1. SSH to the board and make sure MAVLink forwarding runs.
+   By default it automatically starts when booting.
+   It can be started manually with:
    ```
    systemctl start mavlink-router
    ```
-1. Start QGroundControl and it should automatically connect.
-1. Instead of starting QGroundControl, you can open a [NuttX shell](https://dev.px4.io/en/debug/system_console.html#mavlink-shell) with:
+1. Start *QGroundControl* and it should automatically connect.
+1. Instead of starting *QGroundControl*, you can open a [MAVLink shell](https://dev.px4.io/master/en/debug/mavlink_shell.html) using the script:
    ```
    ./Tools/mavlink_shell.py 0.0.0.0:14550
    ```
@@ -156,7 +160,7 @@ After setting up the PX4 development environment, follow these steps update the 
 ## Connecting LeddarOne Range Finder {#leddarone}
 
 Connect the [LeddarOne](../sensor/leddar_one.md) to the Aero telemetry port.
-The pinout for the LeddarOne and Aero telemetry port are as follows.
+The pinout for the LeddarOne and Aero telemetry port (TELEM1) are as follows.
 
 | Pin | Aerofc TELEMETRY | LeddarOne        |
 | --- | ---------------- | ---------------- |
@@ -167,9 +171,7 @@ The pinout for the LeddarOne and Aero telemetry port are as follows.
 | 5   | SDA              | TX               |
 | 6   | GND              | -                |
 
-To enable the rangefinder set the [SENS_EN_LEDDAR1](../advanced_config/parameter_reference.md#SENS_EN_LEDDAR1) parameter to 1 and reboot the board (instructions for setting parameters [available here](../advanced_config/parameters.md)).
-
-> **Tip** If you need to restore the telemetry port to MAVLink, set `SENS_EN_LEDDAR1=0` and reboot.
+To enable the rangefinder set the [SENS_LEDDAR1_CFG](../advanced_config/parameter_reference.md#SENS_LEDDAR1_CFG) parameter to TELEM1 and reboot the board (instructions for setting parameters [available here](../advanced_config/parameters.md)).
 
 ## Connecting Lidar Lite Range Finder {#lidar_lite}
 

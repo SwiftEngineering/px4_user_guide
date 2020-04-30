@@ -24,7 +24,7 @@ The steps are:
 
    ![FMUv2 update](../../assets/qgc/setup/firmware/bootloader_update.jpg)
 1. Wait for the vehicle to reboot.
-1. [Find and enable](../advanced_config/parameters.md#parameter-configuration) the parameter [SYS_BL_UPDATE](../advanced_config/parameter_reference.md#SYS_BL_UPDATE).
+1. [Find and enable](../advanced_config/parameters.md) the parameter [SYS_BL_UPDATE](../advanced_config/parameter_reference.md#SYS_BL_UPDATE).
 1. Reboot (disconnect/reconnect the board).
    The bootloader update will only take a few seconds.
    
@@ -84,5 +84,4 @@ After the bootloader has updated you can [Load PX4 Firmware](../config/firmware.
 
 Boards that are not part of the [Pixhawk Series](../flight_controller/pixhawk_series.md) will have their own mechanisms for bootloader update.
 
-These will be documented (where relevant) with the board:
-- [Omnibus F4 SD > PX4 Bootloader Update](../flight_controller/omnibus_f4_sd.md#upload)
+For boards that are preflashed with Betaflight, see [Bootloader Flashing onto Betaflight Systems](bootloader_update_from_betaflight.md).

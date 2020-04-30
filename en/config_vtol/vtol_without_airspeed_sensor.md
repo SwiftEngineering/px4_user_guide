@@ -27,7 +27,7 @@ The flight should be performed at a speed that would be sufficient to fly in hig
 
 ## Examining the Log
 
-After the reference flight download the log and use [FlightPlot](http://dev.px4.io/en/log/flight_log_analysis.html#flightplot-desktop) (or another analysis tool) to examine the log.
+After the reference flight download the log and use [FlightPlot](../log/flight_log_analysis.md#flightplot) (or another analysis tool) to examine the log.
 Plot the altitude (`GPOS.Alt`), thrust (`ATC1.Thrust`), groundspeed (Expression: `sqrt(GPS.VelN\^2 + GPS.VelE\^2)`), pitch (`ATT.Pitch`) and roll (`AT.Roll`).
 
 Examine the throttle level (thrust) when the vehicle is level (no or little pitch and roll), 
@@ -44,6 +44,8 @@ This can be used to tune your throttle setting after the first flight without a
 ## Setting the Parameters
 
 To bypass the flight checks you need to set the circuit breaker for the airspeed sensor ([CBRK_AIRSPD_CHK](../advanced_config/parameter_reference.md#CBRK_AIRSPD_CHK)) to 162128.
+
+> **Note** Enabling `CBRK_AIRSPD_CHK` will prevent the sensor driver from starting and prevent calibrarion (i.e. it does more than just bypassing flight checks).
 
 To tell the flight controller it will fly without an airspeed sensor you
 need to set the airspeed mode ([FW_ARSP_MODE](../advanced_config/parameter_reference.md#FW_ARSP_MODE)) to 'declare airspeed invalid' (2).

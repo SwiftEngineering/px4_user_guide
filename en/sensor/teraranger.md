@@ -4,9 +4,9 @@ TeraRanger provide a number of lightweight distance measurement sensor based on 
 They are typically faster and have greater range than sonar, and smaller and lighter than laser-based systems.
 
 PX4 supports:
-* [TeraRanger One](http://www.teraranger.com/products/teraranger-one/) (0.2 - 14 m) (Requires an [I2C adapter](http://www.teraranger.com/product/teraranger-i2c-adapter/))
-* [TeraRanger Evo 60m](https://www.terabee.com/portfolio-item/teraranger-evo-infrared-distance-sensor/) (0.5 – 60 m)
-* TeraRanger Evo 600Hz (0.75 - 8 m)
+* [TeraRanger One](https://www.terabee.com/shop/lidar-tof-range-finders/teraranger-one/) (0.2 - 14 m) (Requires an [I2C adapter](https://www.terabee.com/shop/accessories/i2c-adapter-for-teraranger-one/))
+* [TeraRanger Evo 60m](https://www.terabee.com/shop/lidar-tof-range-finders/teraranger-evo-60m/) (0.5 – 60 m)
+* [TeraRanger Evo 600Hz](https://www.terabee.com/shop/lidar-tof-range-finders/teraranger-evo-600hz/) (0.75 - 8 m)
 
 
 > **Info** The *Terranger One* is used in the [Qualcomm Snapdragon Flight](../flight_controller/snapdragon_flight.md).
@@ -24,7 +24,7 @@ PX4 supports:
 
 All TeraRanger sensors must be connected via the I2C bus.
 
-While TeraRanger One requires an [I2C adapter](http://www.teraranger.com/product/teraranger-i2c-adapter/) any sensor from TeraRanger Evo series can be connected directly to the autopilot.
+While TeraRanger One requires an [I2C adapter](https://www.terabee.com/shop/accessories/i2c-adapter-for-teraranger-one/) any sensor from TeraRanger Evo series can be connected directly to the autopilot.
 
 
 ## Software Configuration
@@ -38,4 +38,4 @@ In order to use the correct max/min values the appropriate model of the Evo sens
 
 ## Further Information
 
-* [Modules Reference: Distance Sensor (Driver) : teraranger](https://dev.px4.io/en/middleware/modules_driver_distance_sensor.html#teraranger) (PX4 Dev Guide)
+* [Modules Reference: Distance Sensor (Driver) : teraranger](https://dev.px4.io/master/en/middleware/modules_driver_distance_sensor.html#teraranger) (PX4 Dev Guide)
